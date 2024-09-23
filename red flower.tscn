@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://0wrhpt5honky"]
+
+[ext_resource type="Texture2D" uid="uid://bi4dfwm2urfok" path="res://textures/flowers/fower red.png" id="1_4iw8u"]
+[ext_resource type="Script" path="res://red flower.gd" id="1_gvnxq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmkkh"]
+size = Vector2(25, 62)
+
+[node name="red_flower" type="Area2D"]
+script = ExtResource("1_gvnxq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("1_4iw8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 1)
+shape = SubResource("RectangleShape2D_fmkkh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

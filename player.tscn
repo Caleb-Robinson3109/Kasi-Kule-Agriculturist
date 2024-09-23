@@ -1,0 +1,180 @@
+[gd_scene load_steps=12 format=3 uid="uid://dmfjbcjfvqgxk"]
+
+[ext_resource type="Texture2D" uid="uid://cinqaoijpeiyf" path="res://textures/main player/default.png" id="1_3l6wh"]
+[ext_resource type="Texture2D" uid="uid://dp6todj0cf7ng" path="res://textures/main player/tractor.png" id="2_5laov"]
+[ext_resource type="Script" path="res://tractorTimeOutTimer.gd" id="3_d2tmf"]
+[ext_resource type="Script" path="res://wateringCanTimeOutTimer.gd" id="4_wajq4"]
+[ext_resource type="Script" path="res://fertalizerTimeOutTimer.gd" id="5_6ip0l"]
+[ext_resource type="Script" path="res://PitchForkTimeOutTimer.gd" id="6_rnpud"]
+[ext_resource type="Script" path="res://SeedsTimeOutTimer.gd" id="7_kwv85"]
+
+[sub_resource type="GDScript" id="GDScript_scdaa"]
+script/source = "extends CharacterBody2D
+@onready var sprite_2d = $Sprite2D
+@export var movementMode: int = 1
+@onready var player = $\".\"
+
+func save_node(save):
+	save.player_save.position.x = player.global_position.x
+	save.player_save.position.y = player.global_position.y
+	var children = player.get_children()
+	save.player_save.power_up.type = \"none\"
+	for node in children:
+		if node.name != \"Sprite2D\" && node.name != \"default collision\" && node.name != \"tractor collision\":
+			#also sets the hitbox to the tractor hitbox
+			if node.name == \"tractorTimeOutTimer\" && !node.is_stopped():
+				save.player_save.power_up.type = \"tractor\"
+				save.player_save.power_up.time = node.time_left
+			elif node.name == \"wateringCanTimeOutTimer\" && !node.is_stopped():
+				save.player_save.power_up.type = \"wateringCan\"
+				save.player_save.power_up.time = node.time_left
+			elif node.name == \"fertalizerTimeOutTimer\" && !node.is_stopped():
+				save.player_save.power_up.type = \"fertalizer\"
+				save.player_save.power_up.time = node.time_left
+			elif node.name == \"PitchForkTimeOutTimer\" && !node.is_stopped():
+				save.player_save.power_up.type = \"pitchFork\"
+				save.player_save.power_up.time = node.time_left
+			elif node.name == \"SeedsTimeOutTimer\" && !node.is_stopped():
+				save.player_save.power_up.type = \"seeds\"
+				save.player_save.power_up.time = node.time_left
+			else:
+				pass
+		save.player_save.sprite = player.find_child(\"Sprite2D\").animation
+	return save
+	
+func load_node(save):
+	player.global_position = Vector2(save.player_save.position.x, save.player_save.position.y)
+	if save.player_save.power_up.type != \"none\":
+		if save.player_save.power_up.type == \"tractor\":
+			player.find_child(\"tractorTimeOutTimer\").start(save.player_save.power_up.time)
+		elif save.player_save.power_up.type == \"wateringCan\":
+			player.find_child(\"wateringCanTimeOutTimer\").start(save.player_save.power_up.time)
+		elif save.player_save.power_up.type == \"fertalizer\":
+			player.find_child(\"fertalizerTimeOutTimer\").start(save.player_save.power_up.time)
+		elif save.player_save.power_up.type == \"pitchFork\":
+			player.find_child(\"PitchForkTimeOutTimer\").start(save.player_save.power_up.time)
+		elif save.player_save.power_up.type == \"seeds\":
+			player.find_child(\"SeedsTimeOutTimer\").start(save.player_save.power_up.time)
+		else:
+			pass
+	player.find_child(\"Sprite2D\").animation = save.player_save.sprite
+	if player.find_child(\"Sprite2D\").animation == \"default\":
+		player.find_child(\"default collision\").disabled = false
+		player.find_child(\"tractor collision\").disabled = true
+	else:
+		player.find_child(\"default collision\").disabled = true
+		player.find_child(\"tractor collision\").disabled = false
+#var Cvelocity = Vector2(0,0)
+var mousePos = null
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+func _physics_process(delta):
+	# Get the input direction and handle the movement/deceleration.
+	# directionlr constrols the left and right movement
+	if movementMode == 1:
+		var direction_lr = Input.get_axis(\"left\", \"right\")
+		if direction_lr:
+			velocity.x = direction_lr * Gloable.speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, 50)
+			
+		# directionud controls the up and down directions
+		var direction_ud = Input.get_axis(\"up\", \"down\")
+		if direction_ud:
+			velocity.y = direction_ud * Gloable.speed
+		else:
+			velocity.y = move_toward(velocity.y, 0, 50)
+		
+		#bounds the player to the screen
+		var screenSize = get_viewport_rect().size
+		position.x = clamp(position.x, 70, screenSize.x - 70)
+		position.y = clamp(position.y, 75, screenSize.y - 70)
+		
+		move_and_slide()
+	else:
+		velocity = Vector2(0,0)
+		mousePos = get_global_mouse_position()
+		if sqrt(((mousePos.x - position.x)*(mousePos.x - position.x))+((mousePos.y - position.y)*(mousePos.y - position.y))) > 10:
+			var direction = (mousePos - position).normalized()
+			velocity = (direction * Gloable.speed)
+		var screenSize = get_viewport_rect().size
+		position.x = clamp(position.x, 70, screenSize.x - 70)
+		position.y = clamp(position.y, 75, screenSize.y - 70)
+		move_and_slide()
+
+
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jyc1b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3l6wh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5laov")
+}],
+"loop": true,
+"name": &"tractor",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ak5oj"]
+radius = 7.0
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_38r3c"]
+size = Vector2(55, 80)
+
+[node name="player" type="CharacterBody2D"]
+script = SubResource("GDScript_scdaa")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_jyc1b")
+
+[node name="default collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ak5oj")
+
+[node name="tractor collision" type="CollisionShape2D" parent="."]
+position = Vector2(2.00004, 2.49997)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_38r3c")
+disabled = true
+
+[node name="tractorTimeOutTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+script = ExtResource("3_d2tmf")
+
+[node name="wateringCanTimeOutTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+script = ExtResource("4_wajq4")
+
+[node name="fertalizerTimeOutTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+script = ExtResource("5_6ip0l")
+
+[node name="PitchForkTimeOutTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+script = ExtResource("6_rnpud")
+
+[node name="SeedsTimeOutTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+script = ExtResource("7_kwv85")
+
+[connection signal="frame_changed" from="Sprite2D" to="." method="_on_sprite_2d_frame_changed"]
+[connection signal="timeout" from="tractorTimeOutTimer" to="tractorTimeOutTimer" method="_on_timeout"]
+[connection signal="timeout" from="wateringCanTimeOutTimer" to="wateringCanTimeOutTimer" method="_on_timeout"]
+[connection signal="timeout" from="fertalizerTimeOutTimer" to="fertalizerTimeOutTimer" method="_on_timeout"]
+[connection signal="timeout" from="PitchForkTimeOutTimer" to="PitchForkTimeOutTimer" method="_on_timeout"]
+[connection signal="timeout" from="SeedsTimeOutTimer" to="SeedsTimeOutTimer" method="_on_timeout"]

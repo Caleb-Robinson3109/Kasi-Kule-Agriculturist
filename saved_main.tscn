@@ -1,0 +1,374 @@
+[gd_scene load_steps=35 format=3]
+
+[ext_resource type="Script" path="res://main.gd" id="1_py7f6"]
+[ext_resource type="Texture2D" path="res://textures/map/backgroundv2.png" id="2_06qho"]
+[ext_resource type="Script" path="res://progress bar test button.gd" id="3_6r7el"]
+[ext_resource type="Script" path="res://loadTest.gd" id="4_5qca3"]
+[ext_resource type="PackedScene" path="res://themes/progress bar.tscn" id="5_mo7pg"]
+[ext_resource type="Script" path="res://themes/progress bar.gd" id="6_olvtd"]
+[ext_resource type="Script" path="res://RichTextLabel.gd" id="7_dbw1o"]
+[ext_resource type="Script" path="res://stall.gd" id="8_dnn7x"]
+[ext_resource type="Texture2D" path="res://textures/map/stall.png" id="9_wa0vn"]
+[ext_resource type="Script" path="res://selling area.gd" id="10_s7q2w"]
+[ext_resource type="Script" path="res://garden.gd" id="11_j6dks"]
+[ext_resource type="Script" path="res://Timer2.gd" id="12_3a4uv"]
+[ext_resource type="Script" path="res://Shop.gd" id="13_x8gou"]
+[ext_resource type="Texture2D" path="res://textures/map/shop.png" id="14_udqbf"]
+[ext_resource type="PackedScene" path="res://scenes/menus/upgrade_shop.tscn" id="15_8yuvl"]
+[ext_resource type="PackedScene" path="res://player.tscn" id="16_1racr"]
+[ext_resource type="Texture2D" path="res://textures/map/fence.png" id="17_elwpn"]
+[ext_resource type="PackedScene" path="res://scenes/shopper.tscn" id="18_2r2be"]
+[ext_resource type="Script" path="res://scenes/shopper.gd" id="19_7a2qf"]
+[ext_resource type="Script" path="res://beginTrip.gd" id="20_ofym2"]
+[ext_resource type="Script" path="res://shoppingTimer.gd" id="21_0syr0"]
+[ext_resource type="Script" path="res://retrun timer.gd" id="22_toc1f"]
+[ext_resource type="Script" path="res://retrun timer2.gd" id="23_htfnq"]
+[ext_resource type="PackedScene" path="res://scenes/menus/pause_menu.tscn" id="24_q2c8r"]
+[ext_resource type="PackedScene" path="res://scenes/loading_screen.tscn" id="25_coh42"]
+[ext_resource type="Script" path="res://scenes/loading_screen.gd" id="26_1jter"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7m8p"]
+size = Vector2(85, 89.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bl17m"]
+size = Vector2(112, 211)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ororb"]
+size = Vector2(48, 181)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vu7an"]
+size = Vector2(1000, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7kovp"]
+size = Vector2(44, 202.5)
+
+[sub_resource type="GDScript" id="GDScript_scdaa"]
+script/source = "extends CharacterBody2D
+@onready var sprite_2d = $Sprite2D
+@export var movementMode = 1
+@onready var player = $\".\"
+
+func save_node(save):
+	save.player_save.position.x = player.global_position.x
+	save.player_save.position.y = player.global_position.y
+	var children = player.get_children()
+	save.player_save.power_up.type = \"none\"
+	for node in children:
+		if node.name != \"Sprite2D\" && node.name != \"default collision\" && node.name != \"tractor collision\":
+			#also sets the hitbox to the tractor hitbox
+			if node.name == \"tractorTimeOutTimer\" && !node.is_stopped():
+				save.player_save.power_up.type = \"tractor\"
+				save.player_save.power_up.time = node.time_left
+			elif node.name == \"wateringCanTimeOutTimer\" && !node.is_stopped():
+				save.player_save.power_up.type = \"wateringCan\"
+				save.player_save.power_up.time = node.time_left
+			elif node.name == \"fertalizerTimeOutTimer\" && !node.is_stopped():
+				save.player_save.power_up.type = \"fertalizer\"
+				save.player_save.power_up.time = node.time_left
+			elif node.name == \"PitchForkTimeOutTimer\" && !node.is_stopped():
+				save.player_save.power_up.type = \"pitchFork\"
+				save.player_save.power_up.time = node.time_left
+			elif node.name == \"SeedsTimeOutTimer\" && !node.is_stopped():
+				save.player_save.power_up.type = \"seeds\"
+				save.player_save.power_up.time = node.time_left
+			else:
+				pass
+		save.player_save.sprite = player.find_child(\"Sprite2D\").animation
+	return save
+	
+func load_node(save):
+	player.global_position = Vector2(save.player_save.position.x, save.player_save.position.y)
+	if save.player_save.power_up.type != \"none\":
+		if save.player_save.power_up.type == \"tractor\":
+			player.find_child(\"tractorTimeOutTimer\").start(save.player_save.power_up.time)
+		elif save.player_save.power_up.type == \"wateringCan\":
+			player.find_child(\"wateringCanTimeOutTimer\").start(save.player_save.power_up.time)
+		elif save.player_save.power_up.type == \"fertalizer\":
+			player.find_child(\"fertalizerTimeOutTimer\").start(save.player_save.power_up.time)
+		elif save.player_save.power_up.type == \"pitchFork\":
+			player.find_child(\"PitchForkTimeOutTimer\").start(save.player_save.power_up.time)
+		elif save.player_save.power_up.type == \"seeds\":
+			player.find_child(\"SeedsTimeOutTimer\").start(save.player_save.power_up.time)
+		else:
+			pass
+	player.find_child(\"Sprite2D\").animation = save.player_save.sprite
+	if player.find_child(\"Sprite2D\").animation == \"default\":
+		player.find_child(\"default collision\").disabled = false
+		player.find_child(\"tractor collision\").disabled = true
+	else:
+		player.find_child(\"default collision\").disabled = true
+		player.find_child(\"tractor collision\").disabled = false
+#var Cvelocity = Vector2(0,0)
+var mousePos = null
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+func _physics_process(delta):
+	# Get the input direction and handle the movement/deceleration.
+	# directionlr constrols the left and right movement
+	if movementMode == 1:
+		var direction_lr = Input.get_axis(\"left\", \"right\")
+		if direction_lr:
+			velocity.x = direction_lr * Gloable.speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, 50)
+			
+		# directionud controls the up and down directions
+		var direction_ud = Input.get_axis(\"up\", \"down\")
+		if direction_ud:
+			velocity.y = direction_ud * Gloable.speed
+		else:
+			velocity.y = move_toward(velocity.y, 0, 50)
+		
+		#bounds the player to the screen
+		var screenSize = get_viewport_rect().size
+		position.x = clamp(position.x, 70, screenSize.x - 70)
+		position.y = clamp(position.y, 75, screenSize.y - 70)
+		
+		move_and_slide()
+	else:
+		velocity = Vector2(0,0)
+		mousePos = get_global_mouse_position()
+		if sqrt(((mousePos.x - position.x)*(mousePos.x - position.x))+((mousePos.y - position.y)*(mousePos.y - position.y))) > 10:
+			var direction = (mousePos - position).normalized()
+			velocity = (direction * Gloable.speed)
+		var screenSize = get_viewport_rect().size
+		position.x = clamp(position.x, 70, screenSize.x - 70)
+		position.y = clamp(position.y, 75, screenSize.y - 70)
+		move_and_slide()
+
+
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q3s0w"]
+size = Vector2(505, 27.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01rxp"]
+size = Vector2(11.25, 52.25)
+
+[node name="Node" type="Node" groups=["save_group"]]
+script = ExtResource("1_py7f6")
+
+[node name="background" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_06qho")
+expand_mode = 1
+
+[node name="save" type="Button" parent="background"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_left = 753.0
+offset_top = 505.0
+offset_right = 898.0
+offset_bottom = 605.0
+text = "save progress bar
+"
+script = ExtResource("3_6r7el")
+
+[node name="load" type="Button" parent="background"]
+layout_mode = 0
+offset_left = 962.0
+offset_top = 503.0
+offset_right = 1106.0
+offset_bottom = 612.0
+text = "load progress bar"
+script = ExtResource("4_5qca3")
+
+[node name="progress bar" type="Control" parent="background" groups=["save_group"] instance=ExtResource("5_mo7pg")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 776.0
+offset_top = -19.0
+offset_right = 703.0
+offset_bottom = -501.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_olvtd")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.017
+anchor_top = 0.031
+anchor_right = 0.017
+anchor_bottom = 0.031
+offset_left = -11.584
+offset_top = -13.088
+offset_right = 448.416
+offset_bottom = 24.912
+pivot_offset = Vector2(627, -220)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 25
+text = "
+"
+script = ExtResource("7_dbw1o")
+
+[node name="stall" type="StaticBody2D" parent="background" groups=["save_group"]]
+script = ExtResource("8_dnn7x")
+
+[node name="stall texture" type="TextureRect" parent="background/stall"]
+offset_left = 497.0
+offset_top = 411.0
+offset_right = 714.0
+offset_bottom = 646.0
+texture = ExtResource("9_wa0vn")
+
+[node name="power up area" type="CollisionShape2D" parent="background/stall"]
+position = Vector2(600, 541.625)
+shape = SubResource("RectangleShape2D_i7m8p")
+disabled = true
+
+[node name="stall hitBox" type="CollisionShape2D" parent="background/stall"]
+position = Vector2(602, 541)
+shape = SubResource("RectangleShape2D_bl17m")
+
+[node name="selling area" type="Area2D" parent="background/stall"]
+script = ExtResource("10_s7q2w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="background/stall/selling area"]
+position = Vector2(526, 543)
+shape = SubResource("RectangleShape2D_ororb")
+
+[node name="garden" type="StaticBody2D" parent="background" groups=["save_group"]]
+script = ExtResource("11_j6dks")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="background/garden"]
+position = Vector2(595, 180)
+shape = SubResource("RectangleShape2D_vu7an")
+disabled = true
+
+[node name="Timer2" type="Timer" parent="background/garden"]
+wait_time = 0.927774
+script = ExtResource("12_3a4uv")
+
+[node name="Shop" type="Area2D" parent="background"]
+script = ExtResource("13_x8gou")
+
+[node name="TextureRect" type="TextureRect" parent="background/Shop"]
+offset_left = -15.0
+offset_top = 337.0
+offset_right = 601.0
+offset_bottom = 1597.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("14_udqbf")
+
+[node name="seller selling area" type="CollisionShape2D" parent="background/Shop"]
+position = Vector2(118, 550.25)
+shape = SubResource("RectangleShape2D_7kovp")
+
+[node name="Upgrade Shop" type="CanvasLayer" parent="background/Shop" instance=ExtResource("15_8yuvl")]
+
+[node name="seller hitbox" type="StaticBody2D" parent="background/Shop"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="background/Shop/seller hitbox"]
+polygon = PackedVector2Array(110, 442, 81, 436, 58, 395, 23, 390, -10, 410, -13, 671, 107, 668)
+
+[node name="player" type="CharacterBody2D" parent="background" groups=["save_group"] instance=ExtResource("16_1racr")]
+position = Vector2(97.0916, 258.333)
+scale = Vector2(4, 4)
+script = SubResource("GDScript_scdaa")
+movementMode = 1
+
+[node name="fence" type="StaticBody2D" parent="background"]
+
+[node name="fenceHitBox" type="CollisionShape2D" parent="background/fence"]
+position = Vector2(911.5, 442.125)
+shape = SubResource("RectangleShape2D_q3s0w")
+
+[node name="fence1" type="TextureRect" parent="background/fence"]
+offset_left = 856.0
+offset_top = 314.0
+offset_right = 1195.0
+offset_bottom = 495.0
+texture = ExtResource("17_elwpn")
+expand_mode = 1
+
+[node name="fance2" type="TextureRect" parent="background/fence"]
+offset_left = 610.0
+offset_top = 315.0
+offset_right = 976.0
+offset_bottom = 491.0
+texture = ExtResource("17_elwpn")
+expand_mode = 1
+
+[node name="shoppingNPC" type="CharacterBody2D" parent="background" groups=["save_group"] instance=ExtResource("18_2r2be")]
+position = Vector2(1241, 561)
+scale = Vector2(4, 4)
+script = ExtResource("19_7a2qf")
+speed = 2
+
+[node name="pick up area" type="CollisionShape2D" parent="background/shoppingNPC"]
+position = Vector2(-178.375, -2.625)
+shape = SubResource("RectangleShape2D_01rxp")
+disabled = true
+
+[node name="stallMark" type="Marker2D" parent="background/shoppingNPC"]
+position = Vector2(-138.25, -2.25)
+gizmo_extents = 5.0
+
+[node name="backMark" type="Marker2D" parent="background/shoppingNPC"]
+
+[node name="beginTrip" type="Timer" parent="background/shoppingNPC"]
+wait_time = 32.3243
+one_shot = true
+script = ExtResource("20_ofym2")
+
+[node name="shoppingTimer" type="Timer" parent="background/shoppingNPC"]
+one_shot = true
+script = ExtResource("21_0syr0")
+
+[node name="drop_off_buy_flowers" type="Timer" parent="background/shoppingNPC"]
+one_shot = true
+script = ExtResource("22_toc1f")
+
+[node name="retrun timer" type="Timer" parent="background/shoppingNPC"]
+one_shot = true
+script = ExtResource("23_htfnq")
+
+[node name="Pause Menu" type="Control" parent="." instance=ExtResource("24_q2c8r")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="loading Screen" type="Control" parent="." instance=ExtResource("25_coh42")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("26_1jter")
+
+[connection signal="pressed" from="background/save" to="background/save" method="_on_pressed"]
+[connection signal="pressed" from="background/load" to="background/load" method="_on_pressed"]
+[connection signal="body_entered" from="background/stall/selling area" to="background/stall/selling area" method="_on_body_entered"]
+[connection signal="body_exited" from="background/stall/selling area" to="background/stall/selling area" method="_on_body_exited"]
+[connection signal="script_changed" from="background/garden/Timer2" to="background/garden/Timer2" method="_on_script_changed"]
+[connection signal="timeout" from="background/garden/Timer2" to="background/garden/Timer2" method="_on_timeout"]
+[connection signal="body_entered" from="background/garden/@Area2D@3" to="background/garden/@Area2D@3" method="_on_body_entered"]
+[connection signal="body_entered" from="background/garden/red_flower" to="background/garden/red_flower" method="_on_body_entered"]
+[connection signal="body_entered" from="background/garden/@Area2D@5" to="background/garden/@Area2D@5" method="_on_body_entered"]
+[connection signal="body_entered" from="background/garden/yellow_flower" to="background/garden/yellow_flower" method="_on_body_entered"]
+[connection signal="body_entered" from="background/Shop" to="background/Shop" method="_on_body_entered"]
+[connection signal="body_exited" from="background/Shop" to="background/Shop" method="_on_body_exited"]
+[connection signal="timeout" from="background/shoppingNPC/beginTrip" to="background/shoppingNPC/beginTrip" method="_on_timeout"]
+[connection signal="timeout" from="background/shoppingNPC/shoppingTimer" to="background/shoppingNPC/shoppingTimer" method="_on_timeout"]
+[connection signal="timeout" from="background/shoppingNPC/drop_off_buy_flowers" to="background/shoppingNPC/drop_off_buy_flowers" method="_on_timeout"]
+[connection signal="timeout" from="background/shoppingNPC/retrun timer" to="background/shoppingNPC/retrun timer" method="_on_timeout"]

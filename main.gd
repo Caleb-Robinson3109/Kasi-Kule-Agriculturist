@@ -1,0 +1,133 @@
+extends Node
+
+func _ready():
+	SavingAndLoad.create_new_save_file()
+	SavingAndLoad.load_nodes()
+	
+func save_node(save):
+	save.gloable_values.bagSize = Gloable.bagSize
+	save.gloable_values.bagUsed = Gloable.bagUsed
+	save.gloable_values.numFlowers = Gloable.numFlowers
+	save.gloable_values.yellowInInventory = Gloable.yellowInInventory
+	save.gloable_values.blueInInventory = Gloable.blueInInventory
+	save.gloable_values.redInInventory = Gloable.redInInventory
+	save.gloable_values.flowersInShop = Gloable.flowersInShop
+	save.gloable_values.bluePrice = Gloable.bluePrice
+	save.gloable_values.redPrice = Gloable.redPrice
+	save.gloable_values.yellowPrice = Gloable.yellowPrice
+	save.gloable_values.totalSold = Gloable.totalSold
+	save.gloable_values.wallet = Gloable.wallet
+	save.gloable_values.defaultBluePrice = Gloable.defaultBluePrice
+	save.gloable_values.defaultRedPrice = Gloable.defaultRedPrice
+	save.gloable_values.defaultYellowPrice = Gloable.defaultYellowPrice
+	save.gloable_values.fertalizerBluePrice = Gloable.fertalizerBluePrice
+	save.gloable_values.fertalizerRedPrice = Gloable.fertalizerRedPrice
+	save.gloable_values.fertalizerYellowPrice = Gloable.fertalizerYellowPrice
+	save.gloable_values.hasFertalizer = Gloable.hasFertalizer
+	save.gloable_values.hasTractor = Gloable.hasTractor
+	save.gloable_values.hasWateringCan = Gloable.hasWateringCan
+	save.gloable_values.hasPitchFork = Gloable.hasPitchFork
+	save.gloable_values.hasSeeds = Gloable.hasSeeds
+	save.gloable_values.doPowerupProgressBar = Gloable.doPowerupProgressBar
+	save.gloable_values.pupTime = Gloable.pupTime
+	save.gloable_values.speed = Gloable.speed
+	save.gloable_values.defaultSpeed = Gloable.defaultSpeed
+	save.gloable_values.tractorSpeed = Gloable.tractorSpeed
+	save.gloable_values.spawnRate = Gloable.spawnRate
+	save.gloable_values.defaultSpawnRate = Gloable.defaultSpawnRate
+	save.gloable_values.wateringCanSpawnRate = Gloable.wateringCanSpawnRate
+	save.gloable_values.maxNumFlowers = Gloable.maxNumFlowers
+	save.gloable_values.defaultMaxNumFlowers = Gloable.defaultMaxNumFlowers
+	save.gloable_values.pitchForkMaxNumFlowers = Gloable.pitchForkMaxNumFlowers
+	save.gloable_values.goShopping = Gloable.goShopping
+	save.gloable_values.shopBagPrice = Gloable.shopBagPrice
+	save.gloable_values.shopClockPrice = Gloable.shopClockPrice
+	save.gloable_values.shopTractorPrice = Gloable.shopTractorPrice
+	save.gloable_values.shopFertalizerPrice = Gloable.shopFertalizerPrice
+	save.gloable_values.shopSeedsPrice = Gloable.shopSeedsPrice
+	save.gloable_values.shopPitchForkPrice = Gloable.shopPitchForkPrice
+	save.gloable_values.shopWateringCanPrice = Gloable.shopWateringCanPrice
+	save.gloable_values.shopGMOSeedsPrice = Gloable.shopGMOSeedsPrice
+	save.gloable_values.shopToolsPrice = Gloable.shopToolsPrice
+	save.gloable_values.shopCompostPrice = Gloable.shopCompostPrice
+	save.gloable_values.diceTractorPrice = Gloable.diceTractorPrice
+	save.gloable_values.diceFertalizerPrice = Gloable.diceFertalizerPrice
+	save.gloable_values.diceSeedsPrice = Gloable.diceSeedsPrice
+	save.gloable_values.dicePitchForkPrice = Gloable.dicePitchForkPrice
+	save.gloable_values.diceWateringCanPrice = Gloable.diceWateringCanPrice
+	save.gloable_values.lastAniShop = Gloable.lastAniShop
+	save.gloable_values.dice = Gloable.dice
+	save.gloable_values.powerUp = Gloable.powerUp
+	save.gloable_values.onScreenPup = Gloable.onScreenPup
+	save.gloable_values.powerUpRange = Gloable.powerUpRange
+	save.gloable_values.movementMode = Gloable.movementMode
+	save.gloable_values.flowersUsed = Gloable.flowersUsedStr
+	
+	return save
+	
+func load_node(save):
+	Gloable.bagSize = save.gloable_values.bagSize
+	Gloable.bagUsed = save.gloable_values.bagUsed
+	Gloable.numFlowers = save.gloable_values.numFlowers
+	Gloable.yellowInInventory = save.gloable_values.yellowInInventory
+	Gloable.blueInInventory = save.gloable_values.blueInInventory
+	Gloable.redInInventory = save.gloable_values.redInInventory
+	Gloable.flowersInShop = save.gloable_values.flowersInShop
+	Gloable.bluePrice = save.gloable_values.bluePrice
+	Gloable.redPrice = save.gloable_values.redPrice
+	Gloable.yellowPrice = save.gloable_values.yellowPrice
+	Gloable.totalSold = save.gloable_values.totalSold
+	Gloable.wallet = save.gloable_values.wallet
+	Gloable.defaultBluePrice = save.gloable_values.defaultBluePrice
+	Gloable.defaultRedPrice = save.gloable_values.defaultRedPrice
+	Gloable.defaultYellowPrice = save.gloable_values.defaultYellowPrice
+	Gloable.fertalizerBluePrice = save.gloable_values.fertalizerBluePrice
+	Gloable.fertalizerRedPrice = save.gloable_values.fertalizerRedPrice
+	Gloable.fertalizerYellowPrice = save.gloable_values.fertalizerYellowPrice
+	Gloable.hasFertalizer = save.gloable_values.hasFertalizer
+	Gloable.hasTractor = save.gloable_values.hasTractor
+	Gloable.hasWateringCan = save.gloable_values.hasWateringCan
+	Gloable.hasPitchFork = save.gloable_values.hasPitchFork
+	Gloable.hasSeeds = save.gloable_values.hasSeeds
+	Gloable.doPowerupProgressBar = save.gloable_values.doPowerupProgressBar
+	Gloable.pupTime = save.gloable_values.pupTime
+	Gloable.speed = save.gloable_values.speed
+	Gloable.defaultSpeed = save.gloable_values.defaultSpeed
+	Gloable.tractorSpeed = save.gloable_values.tractorSpeed
+	Gloable.spawnRate = save.gloable_values.spawnRate
+	Gloable.defaultSpawnRate = save.gloable_values.defaultSpawnRate
+	Gloable.wateringCanSpawnRate = save.gloable_values.wateringCanSpawnRate
+	Gloable.maxNumFlowers = save.gloable_values.maxNumFlowers
+	Gloable.defaultMaxNumFlowers = save.gloable_values.defaultMaxNumFlowers
+	Gloable.pitchForkMaxNumFlowers = save.gloable_values.pitchForkMaxNumFlowers
+	Gloable.goShopping = save.gloable_values.goShopping
+	Gloable.shopBagPrice = save.gloable_values.shopBagPrice
+	Gloable.shopClockPrice = save.gloable_values.shopClockPrice
+	Gloable.shopTractorPrice = save.gloable_values.shopTractorPrice
+	Gloable.shopFertalizerPrice = save.gloable_values.shopFertalizerPrice
+	Gloable.shopSeedsPrice = save.gloable_values.shopSeedsPrice
+	Gloable.shopPitchForkPrice = save.gloable_values.shopPitchForkPrice
+	Gloable.shopWateringCanPrice = save.gloable_values.shopWateringCanPrice
+	Gloable.shopGMOSeedsPrice = save.gloable_values.shopGMOSeedsPrice
+	Gloable.shopToolsPrice = save.gloable_values.shopToolsPrice
+	Gloable.shopCompostPrice = save.gloable_values.shopCompostPrice
+	Gloable.diceTractorPrice = save.gloable_values.diceTractorPrice
+	Gloable.diceFertalizerPrice = save.gloable_values.diceFertalizerPrice
+	Gloable.diceSeedsPrice = save.gloable_values.diceSeedsPrice
+	Gloable.dicePitchForkPrice = save.gloable_values.dicePitchForkPrice
+	Gloable.diceWateringCanPrice = save.gloable_values.diceWateringCanPrice
+	Gloable.lastAniShop = save.gloable_values.lastAniShop
+	Gloable.dice = save.gloable_values.dice
+	Gloable.powerUp = save.gloable_values.powerUp
+	Gloable.onScreenPup = save.gloable_values.onScreenPup
+	Gloable.powerUpRange = save.gloable_values.powerUpRange
+	Gloable.movementMode = Gloable.movementMode
+	
+	if save.gloable_values.flowersUsed == "flowersNormal":
+		Gloable.flowersUsed = Gloable.flowersNormal
+	else:
+		Gloable.flowersUsed = Gloable.flowersSeeds
+
+
+func _on_saver_timeout():
+	SavingAndLoad.save_nodes()
