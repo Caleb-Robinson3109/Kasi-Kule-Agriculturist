@@ -1,0 +1,1497 @@
+[gd_scene load_steps=38 format=3 uid="uid://d3ftb68i4kh7c"]
+
+[ext_resource type="Texture2D" uid="uid://b50uk1khu12ke" path="res://textures/other/bag.png" id="1_o5hud"]
+[ext_resource type="Texture2D" uid="uid://rfyjnmhqv86c" path="res://textures/other/clock.png" id="2_2er1p"]
+[ext_resource type="Theme" uid="uid://onylfn2v31l7" path="res://themes/button_red.tres" id="2_ed23n"]
+[ext_resource type="Script" path="res://scenes/menus/bag_button.gd" id="2_p4ud2"]
+[ext_resource type="Script" path="res://scenes/menus/exitButton.gd" id="2_vnpsr"]
+[ext_resource type="Texture2D" uid="uid://c8xdey2oj8rwf" path="res://textures/power ups/fertalizer.png" id="3_ht6bg"]
+[ext_resource type="Texture2D" uid="uid://csl403oxegxq3" path="res://textures/power ups/pitch fork.png" id="4_6u4ey"]
+[ext_resource type="Texture2D" uid="uid://dennkyddq8yoc" path="res://textures/power ups/seeds.png" id="5_qc6rq"]
+[ext_resource type="Texture2D" uid="uid://c61cxafup4xpg" path="res://textures/other/GMOseeds.png" id="6_5qteb"]
+[ext_resource type="Script" path="res://scenes/menus/clockButton.gd" id="6_7o7el"]
+[ext_resource type="Texture2D" uid="uid://dt4i4j04yd1ya" path="res://textures/power ups/tractor.png" id="6_g55rn"]
+[ext_resource type="Texture2D" uid="uid://cel3lv5t41ef4" path="res://textures/power ups/watering can.png" id="7_0y71t"]
+[ext_resource type="Script" path="res://scenes/menus/GMOSeedsButton.gd" id="7_8uu2i"]
+[ext_resource type="Script" path="res://scenes/menus/fertalizerButton.gd" id="7_ss2ny"]
+[ext_resource type="Texture2D" uid="uid://b20ll0srcvpta" path="res://textures/other/compost.png" id="8_f37bc"]
+[ext_resource type="Script" path="res://scenes/menus/compostButton.gd" id="9_7ey81"]
+[ext_resource type="Script" path="res://scenes/menus/pitchForkButton.gd" id="9_r54dd"]
+[ext_resource type="Texture2D" uid="uid://0sbo2ve3lrqi" path="res://textures/other/wheel barrow.png" id="10_07otx"]
+[ext_resource type="Script" path="res://scenes/menus/tractorButton.gd" id="10_nfxit"]
+[ext_resource type="Script" path="res://scenes/menus/gardeningToolsButton.gd" id="11_6fylq"]
+[ext_resource type="Script" path="res://scenes/menus/seedsButton.gd" id="11_h774i"]
+[ext_resource type="Script" path="res://scenes/menus/wateringCanButton.gd" id="12_asuxi"]
+[ext_resource type="Texture2D" uid="uid://c7vjrppcycd11" path="res://textures/power ups/dice fertalizer.png" id="23_rqlq6"]
+[ext_resource type="Texture2D" uid="uid://dl1aqf8uck26f" path="res://textures/power ups/dice pitch fork.png" id="24_5bu8q"]
+[ext_resource type="Script" path="res://scenes/menus/diceFertalizerButton.gd" id="24_emgyy"]
+[ext_resource type="Texture2D" uid="uid://clghsbgn73g0y" path="res://textures/power ups/dice seeds.png" id="25_wnvfi"]
+[ext_resource type="Texture2D" uid="uid://c6mrp6qvifd72" path="res://textures/power ups/dice tractor.png" id="26_qqkim"]
+[ext_resource type="Script" path="res://scenes/menus/diceSeedsButton.gd" id="26_rtbi1"]
+[ext_resource type="Texture2D" uid="uid://dftrx5n1xoccq" path="res://textures/power ups/dice watering can.png" id="27_uxs03"]
+[ext_resource type="Script" path="res://scenes/menus/seedsDiceButton.gd" id="28_rk0aa"]
+[ext_resource type="Script" path="res://scenes/menus/tractorDiceButton.gd" id="30_tdm2m"]
+[ext_resource type="Script" path="res://scenes/menus/diceWaterButton.gd" id="32_vavhp"]
+
+[sub_resource type="Theme" id="Theme_bt4x3"]
+
+[sub_resource type="Animation" id="Animation_4pgfl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_u56ps"]
+resource_name = "transIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 674)]
+}
+
+[sub_resource type="Animation" id="Animation_jfdmy"]
+resource_name = "transOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 674), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ovug"]
+_data = {
+"RESET": SubResource("Animation_4pgfl"),
+"transIn": SubResource("Animation_u56ps"),
+"transOut": SubResource("Animation_jfdmy")
+}
+
+[node name="Upgrade Shop" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -924.0
+offset_right = 450.0
+offset_bottom = -424.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Shop Section" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Shop Section"]
+custom_minimum_size = Vector2(810, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/Shop Section/Panel"]
+custom_minimum_size = Vector2(860, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -430.0
+offset_top = -25.0
+offset_right = 430.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SHOP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme = ExtResource("2_ed23n")
+text = "EXIT"
+script = ExtResource("2_vnpsr")
+
+[node name="Bag Shop Item" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="Bag Upgrade" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Bag Shop Item"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="mar Item Pic" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Bag Shop Item/Bag Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Item Pic" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Bag Shop Item/Bag Upgrade/mar Item Pic"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Bag Shop Item/Bag Upgrade/mar Item Pic/Item Pic"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_o5hud")
+
+[node name="mar Item Desc" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Bag Shop Item/Bag Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Item Desc" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Bag Shop Item/Bag Upgrade/mar Item Desc"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Bag Shop Item/Bag Upgrade/mar Item Desc/Item Desc"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Bag - Increase max number of flowers you're able to carry."
+vertical_alignment = 1
+
+[node name="Item Buy" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Bag Shop Item/Bag Upgrade"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Bag Shop Item/Bag Upgrade/Item Buy"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+text = "BUY
+$100"
+script = ExtResource("2_p4ud2")
+
+[node name="Clock Shop Item" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="clock upgrade" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Clock Shop Item"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="mar Item Pic" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Clock Shop Item/clock upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Item Pic" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Clock Shop Item/clock upgrade/mar Item Pic"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Clock Shop Item/clock upgrade/mar Item Pic/Item Pic"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2er1p")
+
+[node name="mar Item Desc" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Clock Shop Item/clock upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Item Desc" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Clock Shop Item/clock upgrade/mar Item Desc"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Clock Shop Item/clock upgrade/mar Item Desc/Item Desc"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Clock - Increase the time of power ups."
+vertical_alignment = 1
+
+[node name="Item Buy" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Clock Shop Item/clock upgrade"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme = SubResource("Theme_bt4x3")
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Clock Shop Item/clock upgrade/Item Buy"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+text = "BUY
+$100"
+script = ExtResource("6_7o7el")
+
+[node name="GMO seeds Shop Item" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="GMO seeds" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/GMO seeds Shop Item"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/GMO seeds Shop Item/GMO seeds"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/GMO seeds Shop Item/GMO seeds/MarginContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/GMO seeds Shop Item/GMO seeds/MarginContainer/Panel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_5qteb")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/GMO seeds Shop Item/GMO seeds"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/GMO seeds Shop Item/GMO seeds/MarginContainer2"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/GMO seeds Shop Item/GMO seeds/MarginContainer2/Panel"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "GMO Seeds - The flowers sell for more due to the higher quality 
+flower being grown."
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/GMO seeds Shop Item/GMO seeds"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/GMO seeds Shop Item/GMO seeds/Panel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+text = "BUY
+$100"
+script = ExtResource("7_8uu2i")
+
+[node name="Compost" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Compost"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Compost/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Compost/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Compost/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_f37bc")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Compost/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Compost/HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Compost/HBoxContainer/MarginContainer2/Panel"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Compost - The nutrients from the compost will result in a faster
+flower growing time."
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Compost/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Compost/HBoxContainer/Panel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+text = "BUY
+$100"
+script = ExtResource("9_7ey81")
+
+[node name="Farming Tools" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Farming Tools"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Farming Tools/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Farming Tools/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Farming Tools/HBoxContainer/MarginContainer/Panel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_07otx")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Farming Tools/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Farming Tools/HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Farming Tools/HBoxContainer/MarginContainer2/Panel"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Improved Gardening Tools - With better tools, it's easier 
+to upkeep the garden, allowing for more flowers to grow."
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Farming Tools/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Farming Tools/HBoxContainer/Panel"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+text = "BUY
+$100"
+script = ExtResource("11_6fylq")
+
+[node name="Power up section" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Power up section"]
+custom_minimum_size = Vector2(880, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Power up section/PanelContainer"]
+custom_minimum_size = Vector2(860, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+text = "UPGRADE YOUR POWERUPS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pup Fertalizer Shop Item" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="Fertalizer Upgrade" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Fertalizer Shop Item"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="mar Item Pic" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Fertalizer Shop Item/Fertalizer Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Item Pic" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Fertalizer Shop Item/Fertalizer Upgrade/mar Item Pic"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Fertalizer Shop Item/Fertalizer Upgrade/mar Item Pic/Item Pic"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ht6bg")
+
+[node name="mar Item Desc" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Fertalizer Shop Item/Fertalizer Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Item Desc" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Fertalizer Shop Item/Fertalizer Upgrade/mar Item Desc"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Fertalizer Shop Item/Fertalizer Upgrade/mar Item Desc/Item Desc"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Fertilizer - Increase the selling value of the flowers."
+vertical_alignment = 1
+
+[node name="Item Buy" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Fertalizer Shop Item/Fertalizer Upgrade"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Fertalizer Shop Item/Fertalizer Upgrade/Item Buy"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+text = "BUY
+$100"
+script = ExtResource("7_ss2ny")
+
+[node name="Pup PitchFork Shop Item" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="PITCH FORK Upgrade" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup PitchFork Shop Item"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="mar Item Pic" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup PitchFork Shop Item/PITCH FORK Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Item Pic" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup PitchFork Shop Item/PITCH FORK Upgrade/mar Item Pic"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup PitchFork Shop Item/PITCH FORK Upgrade/mar Item Pic/Item Pic"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_6u4ey")
+
+[node name="mar Item Desc" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup PitchFork Shop Item/PITCH FORK Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Item Desc" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup PitchFork Shop Item/PITCH FORK Upgrade/mar Item Desc"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup PitchFork Shop Item/PITCH FORK Upgrade/mar Item Desc/Item Desc"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Pitchfork - Increase the max number of flowers able to grow."
+vertical_alignment = 1
+
+[node name="Item Buy" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup PitchFork Shop Item/PITCH FORK Upgrade"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup PitchFork Shop Item/PITCH FORK Upgrade/Item Buy"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+text = "BUY
+$100"
+script = ExtResource("9_r54dd")
+
+[node name="Pup Seeds Shop Item" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="seeds Upgrade" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Seeds Shop Item"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="mar Item Pic" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Seeds Shop Item/seeds Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Item Pic" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Seeds Shop Item/seeds Upgrade/mar Item Pic"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Seeds Shop Item/seeds Upgrade/mar Item Pic/Item Pic"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_qc6rq")
+
+[node name="mar Item Desc" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Seeds Shop Item/seeds Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Item Desc" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Seeds Shop Item/seeds Upgrade/mar Item Desc"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Seeds Shop Item/seeds Upgrade/mar Item Desc/Item Desc"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Seeds - More valuable flowers will grow more often."
+vertical_alignment = 1
+
+[node name="Item Buy" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Seeds Shop Item/seeds Upgrade"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Seeds Shop Item/seeds Upgrade/Item Buy"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+text = "BUY
+$100"
+script = ExtResource("11_h774i")
+
+[node name="Pup Tractor Shop Item" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="tractor Upgrade" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Tractor Shop Item"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="mar Item Pic" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Tractor Shop Item/tractor Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Item Pic" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Tractor Shop Item/tractor Upgrade/mar Item Pic"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Tractor Shop Item/tractor Upgrade/mar Item Pic/Item Pic"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_g55rn")
+
+[node name="mar Item Desc" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Tractor Shop Item/tractor Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Item Desc" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Tractor Shop Item/tractor Upgrade/mar Item Desc"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Tractor Shop Item/tractor Upgrade/mar Item Desc/Item Desc"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Tractor - She can go slow or she can go faster."
+vertical_alignment = 1
+
+[node name="Item Buy" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Tractor Shop Item/tractor Upgrade"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Tractor Shop Item/tractor Upgrade/Item Buy"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+text = "BUY
+$100"
+script = ExtResource("10_nfxit")
+
+[node name="Pup WateringCan Shop Item" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="watering can Upgrade" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup WateringCan Shop Item"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="mar Item Pic" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup WateringCan Shop Item/watering can Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Item Pic" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup WateringCan Shop Item/watering can Upgrade/mar Item Pic"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup WateringCan Shop Item/watering can Upgrade/mar Item Pic/Item Pic"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_0y71t")
+
+[node name="mar Item Desc" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup WateringCan Shop Item/watering can Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Item Desc" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup WateringCan Shop Item/watering can Upgrade/mar Item Desc"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup WateringCan Shop Item/watering can Upgrade/mar Item Desc/Item Desc"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Watering Can - Flowers will grow quicker."
+vertical_alignment = 1
+
+[node name="Item Buy" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup WateringCan Shop Item/watering can Upgrade"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup WateringCan Shop Item/watering can Upgrade/Item Buy"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+text = "BUY
+$100"
+script = ExtResource("12_asuxi")
+
+[node name="Load the dice Section" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Load the dice Section"]
+custom_minimum_size = Vector2(880, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Load the dice Section/Panel"]
+custom_minimum_size = Vector2(860, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -430.0
+offset_top = -25.0
+offset_right = 430.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "LOAD THE DICE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pup Dice Fertalizer" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="fertalizer dice" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Fertalizer"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="mar Item Pic" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Fertalizer/fertalizer dice"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Item Pic" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Fertalizer/fertalizer dice/mar Item Pic"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Fertalizer/fertalizer dice/mar Item Pic/Item Pic"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_rqlq6")
+
+[node name="mar Item Desc" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Fertalizer/fertalizer dice"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Item Desc" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Fertalizer/fertalizer dice/mar Item Desc"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Fertalizer/fertalizer dice/mar Item Desc/Item Desc"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "The next power-up you encounter will be fertilizer."
+vertical_alignment = 1
+
+[node name="Item Buy" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Fertalizer/fertalizer dice"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Fertalizer/fertalizer dice/Item Buy"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+text = "BUY
+$200"
+script = ExtResource("24_emgyy")
+
+[node name="Pup Dice Pitch Fork" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="pitch fork dice" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Pitch Fork"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="mar Item Pic" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Pitch Fork/pitch fork dice"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Item Pic" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Pitch Fork/pitch fork dice/mar Item Pic"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Pitch Fork/pitch fork dice/mar Item Pic/Item Pic"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("24_5bu8q")
+
+[node name="mar Item Desc" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Pitch Fork/pitch fork dice"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Item Desc" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Pitch Fork/pitch fork dice/mar Item Desc"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Pitch Fork/pitch fork dice/mar Item Desc/Item Desc"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "The next power up you encounter will be a pitchfork."
+vertical_alignment = 1
+
+[node name="Item Buy" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Pitch Fork/pitch fork dice"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Pitch Fork/pitch fork dice/Item Buy"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+text = "BUY
+$200"
+script = ExtResource("26_rtbi1")
+
+[node name="Pup Dice Seeds" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="seeds" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Seeds"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="mar Item Pic" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Seeds/seeds"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Item Pic" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Seeds/seeds/mar Item Pic"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Seeds/seeds/mar Item Pic/Item Pic"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_wnvfi")
+
+[node name="mar Item Desc" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Seeds/seeds"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Item Desc" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Seeds/seeds/mar Item Desc"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Seeds/seeds/mar Item Desc/Item Desc"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "The next power up you encounter will be seeds."
+vertical_alignment = 1
+
+[node name="Item Buy" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Seeds/seeds"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Seeds/seeds/Item Buy"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+text = "BUY
+$200"
+script = ExtResource("28_rk0aa")
+
+[node name="Pup Dice Tractor" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="tractor dice" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Tractor"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="mar Item Pic" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Tractor/tractor dice"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Item Pic" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Tractor/tractor dice/mar Item Pic"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Tractor/tractor dice/mar Item Pic/Item Pic"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_qqkim")
+
+[node name="mar Item Desc" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Tractor/tractor dice"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Item Desc" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Tractor/tractor dice/mar Item Desc"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Tractor/tractor dice/mar Item Desc/Item Desc"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "The next power up you encounter will be a tractor."
+vertical_alignment = 1
+
+[node name="Item Buy" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Tractor/tractor dice"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Tractor/tractor dice/Item Buy"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+text = "BUY
+$200"
+script = ExtResource("30_tdm2m")
+
+[node name="Pup Dice Watering Can" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="watering can Upgrade" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Watering Can"]
+custom_minimum_size = Vector2(880, 100)
+layout_mode = 2
+
+[node name="mar Item Pic" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Watering Can/watering can Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Item Pic" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Watering Can/watering can Upgrade/mar Item Pic"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Watering Can/watering can Upgrade/mar Item Pic/Item Pic"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("27_uxs03")
+
+[node name="mar Item Desc" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Watering Can/watering can Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="Item Desc" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Watering Can/watering can Upgrade/mar Item Desc"]
+custom_minimum_size = Vector2(650, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Watering Can/watering can Upgrade/mar Item Desc/Item Desc"]
+custom_minimum_size = Vector2(630, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -50.0
+offset_right = 315.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "The next power up you recive will be a watering can."
+vertical_alignment = 1
+
+[node name="Item Buy" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Watering Can/watering can Upgrade"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Watering Can/watering can Upgrade/Item Buy"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ed23n")
+text = "BUY
+$200"
+script = ExtResource("32_vavhp")
+
+[node name="Prestidge section" type="MarginContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Prestidge section"]
+custom_minimum_size = Vector2(880, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/Prestidge section/Panel"]
+custom_minimum_size = Vector2(860, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -430.0
+offset_top = -25.0
+offset_right = 430.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "BLACK MARKET"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ani" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Panel")
+libraries = {
+"": SubResource("AnimationLibrary_0ovug")
+}
+
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Bag Shop Item/Bag Upgrade/Item Buy/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Bag Shop Item/Bag Upgrade/Item Buy/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Clock Shop Item/clock upgrade/Item Buy/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Clock Shop Item/clock upgrade/Item Buy/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/GMO seeds Shop Item/GMO seeds/Panel/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/GMO seeds Shop Item/GMO seeds/Panel/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Compost/HBoxContainer/Panel/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Compost/HBoxContainer/Panel/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Farming Tools/HBoxContainer/Panel/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Farming Tools/HBoxContainer/Panel/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Fertalizer Shop Item/Fertalizer Upgrade/Item Buy/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Fertalizer Shop Item/Fertalizer Upgrade/Item Buy/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup PitchFork Shop Item/PITCH FORK Upgrade/Item Buy/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup PitchFork Shop Item/PITCH FORK Upgrade/Item Buy/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Seeds Shop Item/seeds Upgrade/Item Buy/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Seeds Shop Item/seeds Upgrade/Item Buy/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Tractor Shop Item/tractor Upgrade/Item Buy/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Tractor Shop Item/tractor Upgrade/Item Buy/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup WateringCan Shop Item/watering can Upgrade/Item Buy/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup WateringCan Shop Item/watering can Upgrade/Item Buy/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Fertalizer/fertalizer dice/Item Buy/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Fertalizer/fertalizer dice/Item Buy/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Pitch Fork/pitch fork dice/Item Buy/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Pitch Fork/pitch fork dice/Item Buy/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Seeds/seeds/Item Buy/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Seeds/seeds/Item Buy/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Tractor/tractor dice/Item Buy/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Tractor/tractor dice/Item Buy/Button" method="_on_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Watering Can/watering can Upgrade/Item Buy/Button" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/Pup Dice Watering Can/watering can Upgrade/Item Buy/Button" method="_on_pressed"]

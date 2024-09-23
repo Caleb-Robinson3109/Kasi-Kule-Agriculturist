@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://cenuwuoo38wfx"]
+
+[ext_resource type="Script" path="res://themes/progress bar timer.gd" id="1_rqpch"]
+
+[sub_resource type="Theme" id="Theme_lrvmy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upexs"]
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7g0gm"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="progress_bar" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -15.0
+offset_right = -63.0
+offset_bottom = -563.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 34.0
+offset_right = 358.0
+offset_bottom = 54.0
+theme = SubResource("Theme_lrvmy")
+theme_override_styles/background = SubResource("StyleBoxFlat_upexs")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7g0gm")
+max_value = 10.0
+step = 0.0
+value = 10.0
+show_percentage = false
+
+[node name="bar_timer" type="Timer" parent="bar"]
+wait_time = 10.0
+one_shot = true
+script = ExtResource("1_rqpch")
+
+[connection signal="timeout" from="bar/bar_timer" to="bar/bar_timer" method="_on_timeout"]

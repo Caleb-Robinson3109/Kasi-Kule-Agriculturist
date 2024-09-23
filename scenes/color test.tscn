@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://81jdja4w7tow"]
+
+[ext_resource type="Script" path="res://flowerColor.gd" id="1_vblbt"]
+[ext_resource type="Texture2D" uid="uid://cflhvjy8lplk0" path="res://textures/main player/white.png" id="2_1galf"]
+[ext_resource type="Shader" path="res://scenes/color test.gdshader" id="2_gnwln"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0ycb"]
+shader = ExtResource("2_gnwln")
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_vblbt")
+col = true
+metadata/_edit_horizontal_guides_ = [-18.0]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+z_index = -1
+color = Color(0.968627, 0.807843, 0.109804, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasModulate"]
+material = SubResource("ShaderMaterial_v0ycb")
+texture = ExtResource("2_1galf")
+
+[node name="Timer" type="Timer" parent="CanvasModulate"]
+wait_time = 0.05
+
+[connection signal="timeout" from="CanvasModulate/Timer" to="." method="_on_timer_timeout"]

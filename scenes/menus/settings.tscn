@@ -1,0 +1,450 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxqw4w66f7in8"]
+
+[ext_resource type="Script" path="res://scenes/menus/settings.gd" id="1_nx8c5"]
+[ext_resource type="Texture2D" uid="uid://b6mtsfpw4fhnm" path="res://textures/other/settings background.png" id="1_qt07v"]
+[ext_resource type="Script" path="res://scenes/menus/main menu.gd" id="3_g04sy"]
+[ext_resource type="Script" path="res://scenes/menus/MM buttons.gd" id="4_2f6of"]
+[ext_resource type="Theme" uid="uid://78n51yay630b" path="res://themes/button_select.tres" id="5_10gkw"]
+[ext_resource type="Theme" uid="uid://c5vrn0ot1ewq3" path="res://themes/button unselect.tres" id="6_yd2ux"]
+
+[sub_resource type="Theme" id="Theme_knbjn"]
+
+[sub_resource type="Theme" id="Theme_567xi"]
+
+[node name="settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nx8c5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -926.0
+offset_bottom = -521.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5.1, 5.1)
+texture = ExtResource("1_qt07v")
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_right = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_knbjn")
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="back button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+script = ExtResource("3_g04sy")
+
+[node name="settings" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_right = -200
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/settings"]
+custom_minimum_size = Vector2(952, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 72
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="audio" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/audio"]
+custom_minimum_size = Vector2(1152, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 54
+text = "AUDIO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="audio settings" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/audio settings"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/audio settings/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/audio settings/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 55
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/audio settings/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 42
+text = "Music"
+
+[node name="music" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/audio settings/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(576, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 25
+
+[node name="Music" type="HSlider" parent="MarginContainer/ScrollContainer/VBoxContainer/audio settings/HBoxContainer/VBoxContainer/music"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/audio settings/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/audio settings/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 55
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/audio settings/HBoxContainer/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 42
+text = "Other Sounds"
+
+[node name="other sounds" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/audio settings/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(576, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 50
+
+[node name="Enviorment sound" type="HSlider" parent="MarginContainer/ScrollContainer/VBoxContainer/audio settings/HBoxContainer/VBoxContainer2/other sounds"]
+layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_567xi")
+
+[node name="Movemet method" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Movemet method"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 54
+text = "MOVEMENT METHOD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MM buttons" type="Control" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+script = ExtResource("4_2f6of")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/MM buttons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="key_board_button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/MM buttons/HBoxContainer"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 2
+theme = ExtResource("5_10gkw")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 42
+text = "Keyboard"
+
+[node name="margin" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/MM buttons/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="mouse_button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/MM buttons/HBoxContainer"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 2
+theme = ExtResource("6_yd2ux")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 42
+text = "Mouse"
+
+[node name="mouse controls" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="keybinds" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="controls" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 54
+text = "CONTROLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_right = 50
+
+[node name="keyboard" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard"]
+custom_minimum_size = Vector2(501, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 42
+text = "Key Board"
+
+[node name="up1" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/up1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/up1/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "Up"
+
+[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/up1/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "W"
+
+[node name="up2" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/up2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/up2/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "Up"
+
+[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/up2/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "↑"
+
+[node name="down1" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/down1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/down1/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "Down"
+
+[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/down1/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "S"
+
+[node name="down2" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/down2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/down2/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "Down"
+
+[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/down2/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "↓"
+
+[node name="left1" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/left1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/left1/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "Left"
+
+[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/left1/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "A"
+
+[node name="left2" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/left2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/left2/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "Left"
+
+[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/left2/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "←"
+
+[node name="right1" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/right1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/right1/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "Right"
+
+[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/right1/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "D"
+
+[node name="right2" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/right2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/right2/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "Right"
+
+[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/right2/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "→"
+
+[node name="escaoe" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/escaoe"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/escaoe/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "Exit"
+
+[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/keyboard/escaoe/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "ESC"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+
+[node name="controller" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/controller"]
+custom_minimum_size = Vector2(501, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 42
+text = "Controller"
+
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/back button" to="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/back button" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/MM buttons/HBoxContainer/key_board_button" to="MarginContainer/ScrollContainer/VBoxContainer/MM buttons" method="_on_key_board_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/MM buttons/HBoxContainer/mouse_button" to="MarginContainer/ScrollContainer/VBoxContainer/MM buttons" method="_on_mouse_button_pressed"]

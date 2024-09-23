@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dva126p2k2ncd"]
+
+[ext_resource type="Texture2D" uid="uid://csl403oxegxq3" path="res://textures/power ups/pitch fork.png" id="1_bgune"]
+[ext_resource type="Script" path="res://scenes/pitch_fork_power_up.gd" id="1_nhnus"]
+[ext_resource type="Script" path="res://scenes/pitch fork time out.gd" id="2_4wdef"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fgwyc"]
+size = Vector2(54, 54)
+
+[node name="pitch fork power up" type="Area2D"]
+scale = Vector2(1.3, 1.3)
+script = ExtResource("1_nhnus")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(9, 3)
+scale = Vector2(3, 3)
+texture = ExtResource("1_bgune")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9, 0)
+shape = SubResource("RectangleShape2D_fgwyc")
+
+[node name="time_out" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+script = ExtResource("2_4wdef")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="time_out" to="time_out" method="_on_timeout"]

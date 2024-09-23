@@ -1,0 +1,12 @@
+{
+	"flower_data": 
+		{
+			"name": "flower",
+			"type": "yellow",
+			"position":
+				{
+					"x": 100,
+					"y": 100
+				}
+		}
+}

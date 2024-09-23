@@ -1,0 +1,114 @@
+[gd_scene load_steps=10 format=3 uid="uid://c5uyfdfhfx2kq"]
+
+[ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_yue8q"]
+[ext_resource type="Texture2D" uid="uid://f588m8p3cd05" path="res://textures/other/backgroundforsettings.png" id="2_1r31e"]
+[ext_resource type="Texture2D" uid="uid://bigl63xjewipf" path="res://textures/other/RobSnake.png" id="3_kv3t0"]
+[ext_resource type="Texture2D" uid="uid://cuhpm3hxgfa3q" path="res://textures/play.png" id="4_0io6b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dvecv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j4ddr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d88ie"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lq5u0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0mmfm"]
+
+[node name="main menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yue8q")
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1r31e")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -255.0
+offset_top = -180.0
+offset_right = 255.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 100
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 72
+text = "Kasi Kule Agriculturalist"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -243.0
+offset_top = 106.0
+offset_right = 19.0
+offset_bottom = 264.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 533.0
+offset_right = 1137.0
+offset_bottom = 638.0
+texture = ExtResource("3_kv3t0")
+
+[node name="play" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -21.0
+offset_right = 150.0
+offset_bottom = 129.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 75)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_dvecv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j4ddr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_d88ie")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_lq5u0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0mmfm")
+text = "
+"
+icon = ExtResource("4_0io6b")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="play" to="." method="_on_play_pressed"]

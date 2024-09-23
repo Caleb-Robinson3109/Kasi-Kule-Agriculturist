@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3 uid="uid://4ujbkofogtg1"]
+
+[ext_resource type="Texture2D" uid="uid://ck7iauu2uu1iu" path="res://textures/shopper1.png" id="1_wd0n2"]
+[ext_resource type="Texture2D" uid="uid://d2h1kcxrdj4xa" path="res://textures/side chars/shopper fertalizer.png" id="2_38hli"]
+[ext_resource type="Texture2D" uid="uid://e4s2rn6lrlua" path="res://textures/side chars/shopper1flowrs.png" id="2_qeuue"]
+[ext_resource type="Texture2D" uid="uid://clvw0vbm4jkyq" path="res://textures/side chars/shopper pitch fork.png" id="4_ivsw1"]
+[ext_resource type="Texture2D" uid="uid://cuuux42rj7u8g" path="res://textures/side chars/shopper seeds.png" id="5_hjc1s"]
+[ext_resource type="Texture2D" uid="uid://dfyhpc8wc3c2p" path="res://textures/side chars/shopper tractor.png" id="6_bxtym"]
+[ext_resource type="Texture2D" uid="uid://br1ew08p6v03x" path="res://textures/side chars/shopper watering can.png" id="7_kftus"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_at6ta"]
+size = Vector2(22, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nh3ch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wd0n2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_38hli")
+}],
+"loop": true,
+"name": &"fertalizer",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qeuue")
+}],
+"loop": true,
+"name": &"flower",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ivsw1")
+}],
+"loop": true,
+"name": &"pitchFork",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_hjc1s")
+}],
+"loop": true,
+"name": &"seeds",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_bxtym")
+}],
+"loop": true,
+"name": &"tractor",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_kftus")
+}],
+"loop": true,
+"name": &"wateringCan",
+"speed": 5.0
+}]
+
+[node name="shoppingNPC" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -1.5)
+shape = SubResource("RectangleShape2D_at6ta")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nh3ch")

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://h11q1vgv725g"]
+
+[ext_resource type="Script" path="res://scenes/watering_can_power_up.gd" id="1_2iewa"]
+[ext_resource type="Texture2D" uid="uid://cel3lv5t41ef4" path="res://textures/power ups/watering can.png" id="1_wh7vy"]
+[ext_resource type="Script" path="res://scenes/watering can time out.gd" id="2_034ok"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6pu7"]
+size = Vector2(57, 33)
+
+[node name="watering can power up" type="Area2D"]
+rotation = 4.71239
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_2iewa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 2)
+scale = Vector2(3, 3)
+texture = ExtResource("1_wh7vy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 6.5)
+shape = SubResource("RectangleShape2D_l6pu7")
+
+[node name="time_out" type="Timer" parent="."]
+wait_time = 7.0
+autostart = true
+script = ExtResource("2_034ok")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="time_out" to="time_out" method="_on_timeout"]

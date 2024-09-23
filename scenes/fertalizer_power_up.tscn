@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqrcvvadaxqmc"]
+
+[ext_resource type="Texture2D" uid="uid://c8xdey2oj8rwf" path="res://textures/power ups/fertalizer.png" id="1_t2am1"]
+[ext_resource type="Script" path="res://scenes/fertalizer_power_up.gd" id="1_vxvtj"]
+[ext_resource type="Script" path="res://scenes/fertalizer time out.gd" id="2_uj7u0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdh8v"]
+size = Vector2(39, 45)
+
+[node name="fertalizer power up" type="Area2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_vxvtj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(3, 3)
+texture = ExtResource("1_t2am1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 0.5)
+shape = SubResource("RectangleShape2D_xdh8v")
+
+[node name="time_out" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+script = ExtResource("2_uj7u0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="time_out" to="time_out" method="_on_timeout"]

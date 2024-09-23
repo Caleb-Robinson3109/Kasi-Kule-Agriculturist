@@ -1,0 +1,99 @@
+{
+	"progress_bar":
+		{
+			"timer": 0
+		},
+	"stall_power_up":
+		{
+			"type": "none",
+			"time": 0
+		},
+	"garden":
+			[
+			],
+	"player_save":
+		{
+			"position":
+				{
+					"x": 150,
+					"y": 150
+				},
+			"power_up":
+				{
+					"type": "none",
+					"time": 0
+				},
+			"sprite": "default"
+		},
+	"shopper":
+		{
+			"position":
+				{
+					"x": 1241,
+					"y": 561
+				},
+			"timer": "none",
+			"time": 0,
+			"sprite": "default"
+		},
+	"gloable_values":
+		{
+			"bagSize": 1,
+			"bagUsed": 0,
+			"numFlowers": 0,
+			"yellowInInventory": 0,
+			"blueInInventory": 0,
+			"redInInventory": 0,
+			"flowersInShop": 0,
+			"bluePrice": 7,
+			"redPrice": 6,
+			"yellowPrice": 3,
+			"totalSold": 0,
+			"wallet": 0,
+			"defaultBluePrice": 7,
+			"defaultRedPrice": 6,
+			"defaultYellowPrice": 3,
+			"fertalizerBluePrice": 11,
+			"fertalizerRedPrice": 9,
+			"fertalizerYellowPrice": 5,
+			"hasFertalizer": false,
+			"hasTractor": false,
+			"hasWateringCan": false,
+			"hasPitchFork": false,
+			"hasSeeds": false,
+			"doPowerupProgressBar": false,
+			"pupTime": 10,
+			"speed": 500.0,
+			"defaultSpeed": 500.0,
+			"tractorSpeed": 300.0,
+			"spawnRate": 4,
+			"defaultSpawnRate": 2.5,
+			"wateringCanSpawnRate": 0.5,
+			"maxNumFlowers": 5,
+			"defaultMaxNumFlowers": 10,
+			"pitchForkMaxNumFlowers": 4,
+			"flowersUsed": "flowersNormal",
+			"goShopping": false,
+			"shopBagPrice": 100,
+			"shopClockPrice": 100,
+			"shopTractorPrice": 100,
+			"shopFertalizerPrice": 100,
+			"shopSeedsPrice": 100,
+			"shopPitchForkPrice": 100,
+			"shopWateringCanPrice": 100,
+			"shopGMOSeedsPrice": 100,
+			"shopToolsPrice": 100,
+			"shopCompostPrice": 100,
+			"diceTractorPrice": 200,
+			"diceFertalizerPrice": 200,
+			"diceSeedsPrice": 200,
+			"dicePitchForkPrice": 200,
+			"diceWateringCanPrice": 200,
+			"lastAniShop": "",
+			"dice": [],
+			"powerUp": "",
+			"onScreenPup": false,
+			"powerUpRange": false,
+			"movementMode": 1
+		}
+}
